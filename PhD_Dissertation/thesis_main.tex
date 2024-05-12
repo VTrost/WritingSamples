@@ -1,0 +1,203 @@
+% Remove the twoside option for single-sided printing
+\documentclass[12pt,PhD,twoside]{muthesis}
+
+\setlength{\parskip}{1em} % set spacing between paragraphs
+
+\usepackage[color=green]{todonotes}
+%\usepackage[disable]{todonotes}
+\usepackage{float} %for using H in figure commands
+\usepackage{tikz} %for INP diagram
+\usetikzlibrary{shapes.geometric, arrows} %for INP diagram
+\usepackage{pdfpages} %for inlcuding pdfs in appendix
+\usepackage{pythonhighlight}
+
+\usepackage{listings} %for including code snippets
+\lstset{aboveskip=20pt,belowskip=10pt} %adds spacing around listing box
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{lightblue}{rgb}{0.0,0.0,0.9}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+\definecolor{darkred}{rgb}{0.6,0.0,0.0}
+
+\lstset{
+	basicstyle=\ttfamily\footnotesize,
+	columns=fullflexible,
+	showstringspaces=false,
+	numbers=left,                   % where to put the line-numbers
+	numberstyle=\tiny\color{gray},  % the style that is used for the line-numbers
+	stepnumber=1,
+	numbersep=5pt,                  % how far the line-numbers are from the code
+	backgroundcolor=\color{white},      % choose the background color. You must add \usepackage{color}
+	showspaces=false,               % show spaces adding particular underscores
+	showstringspaces=false,         % underline spaces within strings
+	showtabs=false,                 % show tabs within strings adding particular underscores
+	frame=single,                   % adds a frame around the code
+	rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
+	tabsize=2,                      % sets default tabsize to 2 spaces
+	captionpos=b,                   % sets the caption-position to bottom
+	breaklines=true,                % sets automatic line breaking
+	breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+	title=\lstname,                   % show the filename of files included with \lstinputlisting;
+	% also try caption instead of title  
+	commentstyle=\color{gray}\upshape
+}
+
+\lstdefinelanguage{XML}
+{
+	morestring=[s][\color{mauve}]{"}{"},
+	morestring=[s][\color{black}]{>}{<},
+	morecomment=[s]{<?}{?>},
+	morecomment=[s][\color{dkgreen}]{<!--}{-->},
+	stringstyle=\color{black},
+	identifierstyle=\color{lightblue},
+	keywordstyle=\color{red},
+	morekeywords={xmlns,xsi,noNamespaceSchemaLocation,type,id,x,y,source,target,version,tool,transRef,roleRef,objective,eventually}% list your attributes here
+}
+% listing config from https://gist.github.com/sebald/3130827 (31  May 2021)
+
+% This section configures the key parameters of the document, as well as expanding and modifying various typesetting functions.
+\usepackage[activate={true,nocompatibility},final,
+						tracking=true,factor=1100,stretch=10,
+						shrink=10]{microtype}														% This makes the typesetting prettier
+\usepackage[T1]{fontenc}																			
+\usepackage{lmodern}
+\usepackage{amsmath, amsthm, amssymb}										% These packages extend math mode functions
+\usepackage{natbib}																						 % This defines how references are handled (via package natbib)
+\usepackage{multicol}																				   % Package allows multiple columns of text - good for some lists
+\usepackage{xcolor}																						 % Package allows for easier colour management
+
+% These packages help make better tables and figures
+\usepackage{tabularx}																				   % This package gives the option of using tabularx rather than tabular
+\usepackage{longtable} 																			  	   % Package allows spanning of tables over multiple pages
+\usepackage{multirow}																				  % Package used in tables to set cell width to natural text widths
+\usepackage{booktabs}																				   % Allows the use of \toprule, \midrule, \bottomrule insead of \hline
+
+% These packages help with placement of floats
+\usepackage{rotating}																					% This package allows for sidewaysfigure and sideways table options
+\usepackage{afterpage} 																				  % Allows command \afterpage{\clearpage} to allow clever page float control
+\usepackage[section]{placeins} 																  % Forces a page of undrawn floats after each section c.f. \FloatBarrier
+\usepackage{flafter} 																					   % Forces floats to only be drawn after they appear their placement in the document
+%\usepackage{samepage}																			  % Enables an environment that forces elements onto the same page
+
+% These packages modify pdf properties
+\usepackage{pdflscape}																				  % This package can be used to make l'scape pages l'scape in pdf docs	
+\usepackage{pdfpages}																				  % Package allows for clever insertion of pdf pages into a document
+
+% These packages are all to do with automatic cross-referencing
+\usepackage{footnote}																					% Provides an easy way of working with footnotes
+\numberwithin{equation}{chapter}														 % This resets the equation number at the start of each chapter
+\setcounter{secnumdepth}{5}																	  % This changes the depth of section numbering
+\usepackage[font=small]{caption} 																					 % Allows \captionsetup[figure]{list=no} to listing on/off for floats - good for appendicies
+\usepackage{subfigure} 																				   % Enables the use of subfigures
+%\usepackage{makeidx}																					% If you want to create an index for your thesis, you have too much time on your hands
+%\usepackage{showidx}																					 % Use these two packages and think about a taking up a hobby
+%\usepackage[none]{hyphenat}    															   % This can enable or disable hyphenation on line breaks. Why would you do this?
+%\hyphenation{words}																					   % This defines words that cannot be hyphenated, or defines acceptable hyphenations. Much better.
+
+% The following are useful sundries for little jobs						
+\usepackage{siunitx}																				     % Automagically generate si units
+\sisetup{detect-weight, detect-display-math}								     % Settings for the above
+\sisetup{detect-inline-weight=math}													      % Settings for the above
+
+% The following options are useful for drafting documents
+%\usepackage{lineno} 																					    % Provides line numbers on paragraphs, and references therein. Useful for transcripts
+%\usepackage{draftwatermark}																	% Prints a draft watermark
+%\linenumbers 																								        % Makes whole document line numbers. Remember to use lineno package and \resetlinenumber[1]
+
+% The hyperref package is used to create clickable cross-reference links.
+\usepackage[hidelinks]{hyperref}
+
+%\SetWatermarkText{Draft - V9}
+\begin{document}
+%\prefacesection{COVID-19 Impact Statement}
+%It is worth noting that the Covid-19 pandemic did have a negative impact on this project, primarily in the form of limiting collaboration opportunities. The ability to perform research was not impacted because the model work could be done anywhere with a computer and an internet connection but the ability to connect with other people was restricted. The lockdown and transition to working from home meant that over a year was spent without any face-to-face supervision meetings or the research group meetings that had been a weekly occurrence before the pandemic. This resulted in less input and suggestions from other researchers. On top of that, the supervisor for this project was hospitalized with Covid-19 at the beginning of the pandemic, further limiting the amount of input and suggestions available for a few months. The pandemic also meant that travelling for additional training or networking was not possible. Such trips could have been beneficial for solving problems with the model that could not be answered by people locally or easily without face-to-face interactions. The actual model work for this project was able to continue more or less uninterrupted during the pandemic but the project became an essentially solo independent project with little to no external input for around a year.
+%\newpage
+	
+\title{Ice Production in Antarctic Clouds}
+\author{Victoria L. Trost}
+\department{Earth and Environmental Sciences}
+\school{Natural Sciences}
+\faculty{Science and Engineering}
+\def\wordcount{39,185}
+
+\beforeabstract
+
+	Antarctica has a unique environment and changes within the Antarctic atmosphere can have global impacts. The relative lack of aerosols in the Antarctic atmosphere mean that cloud processes will behave differently than those in more polluted regions and so models and parameterizations based on observations in the tropics and mid-latitudes will likely have poor success in simulating Antarctic clouds. This project set out to use the Met Office NERC Cloud (MONC) model and the Cloud AeroSol Interactions Microphysics (CASIM) scheme to simulate mixed-phase clouds observed in Antarctica during the Microphysics of Antarctic Clouds (MAC) field campaign. The main focus of the project was to test the theory that secondary ice production was the cause of the patchy ice distribution that was observed. A secondary focus was to test the ability of ice nucleation parameterizations to accurately simulate Antarctic clouds and evaluate potential first ice sources. Most of the project was devoted to learning how MONC and CASIM function and this thesis provides details on the structure and means of configuring the models. The challenges of learning how to use the model without detailed guidance meant that an accurate simulation of the MAC clouds was not possible. An example of the outputs that the model was able to produce are discussed but the main focus of the thesis is on the structure of the models and guidance of how to begin configuring the models for a range of mixed-phase cloud studies. Recommendations about how to make the models more accessible to new users are also discussed.
+
+\afterabstract
+
+% The next part is optional
+\prefacesection{Acknowledgements}
+	I would like to thank my supervisors, Thomas Choularton and Paul Connolly, for their guidance and support over the last four years. Thank you to Hazel Jones, Emma Simpson, Adrian Hill, and everyone in the MONC user Slack group who were available for asking questions about the models I was using. Thank you to Sebastian O'Shea for providing the observation data used in this project and to everyone in the Centre for Atmospheric Science who provided suggestions and support. Finally a big thank you to my friends and family who supported me, kept me sane, and helped me make the most of my time in Manchester.
+
+%\prefacesection{The Author}
+
+% The next line is NOT optional and MUST appear
+\afterpreface
+
+% The following defines the chapter files and their order.
+\raggedright          																					%justifies left. Comment out for fully justified.
+
+%\listoftodos
+
+\include{allCombined}
+%% CHAPTER 1 %%
+%%%\include{ch1_introduction}
+%\include{method}
+%\include{antarctic}
+%\include{mac}
+
+%% CHAPTER 2 %%
+%%%\include{ch2_cloudPhys}
+
+%% CHAPTER 3 %%
+%%%\include{ch3_1_aerosol}
+%%%\include{ch3_2_activation}
+%%%\include{ch3_3_iceNuc}
+%%%\include{ch3_4_sip}
+%\todo[inline,color=blue!40]{Add precipitation chapter?}
+
+%% CHAPTER 4 %%
+%%%\include{ch4_1_antarctic}
+%%%\include{ch4_2_mac}
+
+%% CHAPTER 5 %%
+%%%\include{ch5_1_modeling}
+%%%\include{ch5_2_monc}
+%%%\include{ch5_3_casim}
+%\todo[inline,color=blue!40]{Add Socrates chapter?}
+%\include{socrates}
+%\include{moncResearch}
+
+%% CHAPTER 6 %%
+%%%\include{ch6_1_moncConfig}
+%\include{exampleCase}
+%%%\include{ch6_2_build}
+%%%\include{ch6_3_processing}
+
+%% CHAPTER 7 %%
+%%%\include{ch7_1_method}
+%%%\include{ch7_2_reality}
+%%%\include{ch7_3_future}
+
+%% CHAPTER 8 %%
+%%%\include{ch8_conclusion}
+
+%%%\include{appendix}
+
+
+\bibliographystyle{apa-good}
+\bibliography{bibliography}
+
+% Comment the following THREE lines if you do NOT have an Appendix
+%\appendix
+%\chapter{A Long Proof}
+%.........
+
+% If you need more than one appendix, then just use another \chapter command
+%\chapter{Yet Another Appendix}
+
+\end{document}
