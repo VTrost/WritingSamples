@@ -1,4 +1,7 @@
 # WritingSamples
-This repo includes a collection of my writing samples.
+This repository includes a collection of my writing samples.
 
-For my full technical writing portfolio, visit my website: https://v-trost.crd.co/#tech-writing
+Repository contents:<br>
+- PhD_Dissertation - Includes LaTeX files for a PhD dissertation using the style guidelines and template provided by the university.
+
+***For my full technical writing portfolio, visit my website: https://v-trost.crd.co/#tech-writing***
